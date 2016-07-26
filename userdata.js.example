@@ -4,6 +4,5 @@ var userInfo = {
 	users: ["username"],
 	userZoom: true,
 	userFollow: true,
-	imageExt: ".png",
 	gMapsAPIKey: "YOUR_API_KEY_HERE"
 };
