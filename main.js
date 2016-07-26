@@ -52,7 +52,7 @@ var mapView = {
     '402': 'Spicy Incense',
     '403': 'Cool Incense',
     '404': 'Floral Incense',
-    '501': 'Troy Disk',
+    '501': 'Lure Module',
     '602': 'X Attack',
     '603': 'X Defense',
     '604': 'X Miracle',
@@ -76,7 +76,6 @@ var mapView = {
         users: users,
         userZoom: userZoom,
         userFollow: userFollow,
-        imageExt: imageExt,
         gMapsAPIKey: gMapsAPIKey
       };
     }
@@ -108,7 +107,6 @@ var mapView = {
     var self = this;
     $('#switchPan').prop('checked', self.settings.userFollow);
     $('#switchZoom').prop('checked', self.settings.userZoom);
-    $('#imageType').prop('checked', (self.settings.imageExt != '.png'));
     $('#strokeOn').prop('checked', false);
 
     $('#switchPan').change(function() {
@@ -124,14 +122,6 @@ var mapView = {
         self.settings.userZoom = true;
       } else {
         self.settings.userZoom = false;
-      }
-    });
-
-    $('#imageType').change(function() {
-      if (this.checked) {
-        self.settings.imageExt = '.gif';
-      } else {
-        self.settings.imageExt = '.png';
       }
     });
 
@@ -364,7 +354,7 @@ var mapView = {
               lng: parseFloat(data.longitude)
             },
             icon: {
-              url: 'image/pokemon/' + self.pad_with_zeroes(data.pokemon_id, 3) + self.settings.imageExt,
+              url: 'image/pokemon/' + self.pad_with_zeroes(data.pokemon_id, 3) + '.png',
               scaledSize: new google.maps.Size(70, 70)
             },
             zIndex: 4,
@@ -385,7 +375,7 @@ var mapView = {
             lng: parseFloat(data.longitude)
           });
           user.catchables[data.spawnpoint_id].setIcon({
-            url: 'image/pokemon/' + self.pad_with_zeroes(data.pokemon_id, 3) + self.settings.imageExt,
+            url: 'image/pokemon/' + self.pad_with_zeroes(data.pokemon_id, 3) + '.png',
             scaledSize: new google.maps.Size(70, 70)
           });
         }

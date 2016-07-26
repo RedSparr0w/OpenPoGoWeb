@@ -70,7 +70,6 @@ html, body {
   left:7%;  
 }
 #bots-list {
-	overflow-y: scroll;
 	max-height: 80vh;
 }
 #bots-list::-webkit-scrollbar { 
