@@ -468,9 +468,9 @@ function buildMenu(user_id, menu) {
 
     document.getElementById('sortButtons').innerHTML = "";
 
-    out = '<div class="row items">';
+    out = '<div class="items"><div class="row">';
     for (i = 0; i < current_user_bag_items.length; i++) {
-      out += '<div class="col s12 m4 l3 center" style="float: left"><img src="image/items/' +
+      out += '<div class="col s12 m6 l3 center" style="float: left"><img src="image/items/' +
               current_user_bag_items[i].inventory_item_data.item.item_id +
               '.png" class="item_img"><br><b>' +
               itemsArray[current_user_bag_items[i].inventory_item_data.item.item_id] +
@@ -478,7 +478,12 @@ function buildMenu(user_id, menu) {
               (current_user_bag_items[i].inventory_item_data.item.count || 0) +
               '</div>';
     }
-    out += '</div>';
+    out += '</div></div>';
+    var nth = 0
+    out = out.replace(/<\/div><div/g, function (match, i, original) {
+      nth++;
+      return (nth % 4 === 0) ? '</div></div><div class="row"><div' : match;
+    });
     document.getElementById('subcontent').innerHTML = out;
   }
   if (menu == 3) {
@@ -529,7 +534,7 @@ function sortAndShowBagPokemon(sortOn, user_id) {
   sortOn = sortOn || 'cp';
   var sortedPokemon = [];
   var eggs = 0;
-  out = '<div class="row items">';
+  out = '<div class="items"><div class="row">';
   for (i = 0; i <  user_data[users[user_id]].bagPokemon.length; i++) {
     if( user_data[users[user_id]].bagPokemon[i].inventory_item_data.pokemon_data.is_egg) {
       eggs++;
@@ -592,7 +597,7 @@ function sortAndShowBagPokemon(sortOn, user_id) {
     pkmnName = pokemonArray[pkmnNum-1].Name;
     pkmnCP = sortedPokemon[i].cp;
     pkmnIV = sortedPokemon[i].iv;
-    candyNum = getCandy(pkmnNum, user_id);
+    candyNum = (getCandy(pkmnNum, user_id) || 0);
     out += '<div class="col s12 m6 l3 center"><img src="image/pokemon/' +
             pkmnImage +
             '" class="png_img"><br><b>' +
@@ -607,7 +612,12 @@ function sortAndShowBagPokemon(sortOn, user_id) {
   }
   // Add number of eggs
   out += '<div class="col s12 m4 l3 center" style="float: left;"><img src="image/pokemon/Egg.png" class="png_img"><br><b>You have ' + eggs + ' egg' + ( eggs !== 1 ? "s" : "" ) + '</div>';
-  out += '</div>';
+  out += '</div></div>';
+  var nth = 0
+  out = out.replace(/<\/div><div/g, function (match, i, original) {
+    nth++;
+    return (nth % 4 === 0) ? '</div></div><div class="row"><div' : match;
+  });
   document.getElementById('subcontent').innerHTML = out;
 }
 
@@ -616,7 +626,7 @@ function sortAndShowPokedex(sortOn, user_id) {
   if(!user_data[users[user_id]].pokedex.length) return;
   sortOn = sortOn || 'id';
   var sortedPokedex = [];
-  out = '<div class="row items">';
+  out = '<div class="items"><div class="row">';
   for (i = 0; i < user_data[users[user_id]].pokedex.length; i++) {
     pkmID = user_data[users[user_id]].pokedex[i].inventory_item_data.pokedex_entry.pokedex_entry_number;
     pkmnName = pokemonArray[pkmID-1].Name;
@@ -657,13 +667,12 @@ function sortAndShowPokedex(sortOn, user_id) {
     pkmnNum = sortedPokedex[i].id;
     pkmnImage = pad_with_zeroes(pkmnNum, 3) +'.png';
     pkmnName = pokemonArray[pkmnNum-1].Name;
-    pkmnName = pokemonArray[pkmnNum-1].Name;
     pkmnEnc = sortedPokedex[i].enc;
     pkmnCap = sortedPokedex[i].cap;
-    candyNum = getCandy(pkmnNum, user_id);
+    candyNum = (getCandy(pkmnNum, user_id) || 0);
     out += '<div class="col s12 m6 l3 center"><img src="image/pokemon/' +
             pkmnImage +
-            '" class="png_img"><br><b> ' +
+            '" class="png_img"><br><b>' +
             pad_with_zeroes(pkmnNum, 3) +
             ' ' +
             pkmnName +
@@ -675,7 +684,12 @@ function sortAndShowPokedex(sortOn, user_id) {
             candyNum +
             '</div>';
   }
-  out += '</div>';
+  out += '</div></div>';
+  var nth = 0
+  out = out.replace(/<\/div><div/g, function (match, i, original) {
+    nth++;
+    return (nth % 4 === 0) ? '</div></div><div class="row"><div' : match;
+  });
   document.getElementById('subcontent').innerHTML = out;
 }
 
