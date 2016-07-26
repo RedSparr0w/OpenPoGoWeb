@@ -464,22 +464,24 @@ function buildMenu(user_id, menu) {
   }
   if (menu == 2) {
     var current_user_bag_items = user_data[users[user_id]].bagItems;
-    document.getElementById('subtitle').innerHTML = current_user_bag_items.length+" item" + ( current_user_bag_items.length !== 1 ? "s" : "" ) + " in Bag";
 
     document.getElementById('sortButtons').innerHTML = "";
 
-    out = '<div class="row items">';
-    for (i = 0; i < current_user_bag_items.length; i++) {
-      out += '<div class="col s12 m4 l3 center" style="float: left"><img src="image/items/' +
-              current_user_bag_items[i].inventory_item_data.item.item_id +
-              '.png" class="item_img"><br><b>' +
-              itemsArray[current_user_bag_items[i].inventory_item_data.item.item_id] +
-              '</b><br>Count: ' +
-              (current_user_bag_items[i].inventory_item_data.item.count || 0) +
-              '</div>';
-    }
-    out += '</div>';
-    document.getElementById('subcontent').innerHTML = out;
+	var totalItems = 0;
+	out = '<div class="row items">';
+	for (i = 0; i < current_user_bag_items.length; i++) {
+	  totalItems += current_user_bag_items[i].inventory_item_data.item.count || 0;
+	  out += '<div class="col s12 m4 l3 center" style="float: left"><img src="image/items/' +
+			  current_user_bag_items[i].inventory_item_data.item.item_id +
+			  '.png" class="item_img"><br><b>' +
+			  itemsArray[current_user_bag_items[i].inventory_item_data.item.item_id] +
+			  '</b><br>Count: ' +
+			  (current_user_bag_items[i].inventory_item_data.item.count || 0) +
+			  '</div>';
+	}
+	out += '</div>';
+	document.getElementById('subtitle').innerHTML = totalItems+" item" + ( totalItems !== 1 ? "s" : "" ) + " in Bag";
+	document.getElementById('subcontent').innerHTML = out;
   }
   if (menu == 3) {
     pkmnTotal = user_data[users[user_id]].bagPokemon.length;
