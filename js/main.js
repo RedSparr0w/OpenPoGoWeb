@@ -506,10 +506,10 @@ var mapView = {
       var pokemonData = user.bagPokemon[i].inventory_item_data.pokemon_data,
         pkmID = pokemonData.pokemon_id,
         pkmnName = self.pokemonArray[pkmID - 1].Name,
-        pkmCP = pokemonData.cp,
-        pkmIVA = pokemonData.individual_attack || 0,
-        pkmIVD = pokemonData.individual_defense || 0,
-        pkmIVS = pokemonData.individual_stamina || 0,
+        pkmCP = Number(pokemonData.cp),
+        pkmIVA = Number(pokemonData.individual_attack) || 0,
+        pkmIVD = Number(pokemonData.individual_defense) || 0,
+        pkmIVS = Number(pokemonData.individual_stamina) || 0,
         pkmIV = ((pkmIVA + pkmIVD + pkmIVS) / 45.0).toFixed(2),
         pkmTime = pokemonData.creation_time_ms || 0;
 
