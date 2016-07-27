@@ -613,8 +613,8 @@ var mapView = {
       var pokedex_entry = user.pokedex[i].inventory_item_data.pokedex_entry,
         pkmID = pokedex_entry.pokedex_entry_number,
         pkmnName = self.pokemonArray[pkmID - 1].Name,
-        pkmEnc = pokedex_entry.times_encountered,
-        pkmCap = pokedex_entry.times_captured;
+        pkmEnc = Number(pokedex_entry.times_encountered),
+        pkmCap = Number(pokedex_entry.times_captured);
 
       sortedPokedex.push({
         "name": pkmnName,
