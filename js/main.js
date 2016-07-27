@@ -504,7 +504,7 @@ var mapView = {
         continue;
       }
       var pokemonData = user.bagPokemon[i].inventory_item_data.pokemon_data,
-        pkmID = pokemonData.pokemon_id,
+        pkmID = Number(pokemonData.pokemon_id),
         pkmnName = self.pokemonArray[pkmID - 1].Name,
         pkmCP = Number(pokemonData.cp),
         pkmIVA = Number(pokemonData.individual_attack) || 0,
@@ -611,7 +611,7 @@ var mapView = {
     out = '<div class="items"><div class="row">';
     for (var i = 0; i < user.pokedex.length; i++) {
       var pokedex_entry = user.pokedex[i].inventory_item_data.pokedex_entry,
-        pkmID = pokedex_entry.pokedex_entry_number,
+        pkmID = Number(pokedex_entry.pokedex_entry_number),
         pkmnName = self.pokemonArray[pkmID - 1].Name,
         pkmEnc = Number(pokedex_entry.times_encountered),
         pkmCap = Number(pokedex_entry.times_captured);
